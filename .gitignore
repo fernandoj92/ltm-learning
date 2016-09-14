@@ -1,0 +1,12 @@
+target/
+
+# IDE noise #
+.idea/
+*.iml
+
+# Package Files #
+#*.jar
+*.war
+*.ear
+
+*.jnilib
