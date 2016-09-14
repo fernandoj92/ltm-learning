@@ -20,9 +20,7 @@ public class MutualInformationTest {
     @Test
     public void testComputeBivariateScore(){
 
-        // The ClassLoader adds a "/" at the beginning of the path that makes it throw an exception when loading
-        String resourcePath = getClass().getResource("/sprinklerData300.arff").getPath().substring(1);
-        DataStream<DataInstance> data  = DataStreamLoader.open(resourcePath);
+        DataStream<DataInstance> data  = DataStreamLoader.open("datasets/ferjorosaData/sprinklerData300.arff");
 
         Attributes attributes = data.getAttributes();
 
@@ -42,9 +40,7 @@ public class MutualInformationTest {
     @Test
     public void testComputeAllPairScores(){
 
-        // The ClassLoader adds a "/" at the beginning of the path that makes it throw an exception when loading
-        String resourcePath = getClass().getResource("/sprinklerData300.arff").getPath().substring(1);
-        DataStream<DataInstance> data  = DataStreamLoader.open(resourcePath);
+        DataStream<DataInstance> data  = DataStreamLoader.open("datasets/ferjorosaData/sprinklerData300.arff");
 
         Attributes attributes = data.getAttributes();
 
@@ -101,8 +97,7 @@ public class MutualInformationTest {
     public void testGetBestPair(){
 
         // The ClassLoader adds a "/" at the beginning of the path that makes it throw an exception when loading
-        String resourcePath = getClass().getResource("/sprinklerData300.arff").getPath().substring(1);
-        DataStream<DataInstance> data  = DataStreamLoader.open(resourcePath);
+        DataStream<DataInstance> data  = DataStreamLoader.open("datasets/ferjorosaData/sprinklerData300.arff");
 
         Attributes attributes = data.getAttributes();
 
@@ -127,8 +122,7 @@ public class MutualInformationTest {
 
         /* Passes a list containing different attributes than the dataSet */
 
-        DataStream<DataInstance> otherData  = DataStreamLoader.open(
-                getClass().getResource("/Asia_train.arff").getPath().substring(1));
+        DataStream<DataInstance> otherData  = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
 
         try{
             mutualInformation.getBestPair(otherData.getAttributes().getFullListOfAttributes());
@@ -145,8 +139,7 @@ public class MutualInformationTest {
     public void testGetClosestAttributeToSet(){
 
         // The ClassLoader adds a "/" at the beginning of the path that makes it throw an exception when loading
-        String resourcePath = getClass().getResource("/sprinklerData300.arff").getPath().substring(1);
-        DataStream<DataInstance> data  = DataStreamLoader.open(resourcePath);
+        DataStream<DataInstance> data  = DataStreamLoader.open("datasets/ferjorosaData/sprinklerData300.arff");
 
         Attributes attributes = data.getAttributes();
 
@@ -180,8 +173,7 @@ public class MutualInformationTest {
 
         /* Passes a list containing different attributes than the dataSet */
 
-        DataStream<DataInstance> otherData  = DataStreamLoader.open(
-                getClass().getResource("/Asia_train.arff").getPath().substring(1));
+        DataStream<DataInstance> otherData  = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
 
         // one way
         try{

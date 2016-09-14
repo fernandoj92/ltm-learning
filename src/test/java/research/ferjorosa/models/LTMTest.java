@@ -25,9 +25,7 @@ public class LTMTest {
     @Test
     public void testUpdateModel(){
 
-        // The ClassLoader adds a "/" at the beginning of the path that makes it throw an exception when loading
-        String resourcePath = getClass().getResource("/Asia_train.arff").getPath().substring(1);
-        DataStream<DataInstance> data  = DataStreamLoader.open(resourcePath);
+        DataStream<DataInstance> data  = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
 
         // Comparar que el score mejora al hacer update vs utilizar 2 aprendizajes independientes
         StructuralLearning structuralLearningAlgorithm = new ApproximateBIAlgorithm(new ApproximateBIConfig());

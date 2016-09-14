@@ -32,9 +32,7 @@ public class LTDAGTest {
 
         /* Creates the LTM structure (LTDAG) */
 
-        // The ClassLoader adds a "/" at the beginning of the path that makes it throw an exception when loading
-        String resourcePath = getClass().getResource("/sprinklerDataHidden.arff").getPath().substring(1);
-        DataStream<DataInstance> data  = DataStreamLoader.open(resourcePath);
+        DataStream<DataInstance> data  = DataStreamLoader.open("datasets/ferjorosaData/sprinklerDataHidden.arff");
 
         Variables variables = new Variables(data.getAttributes());
         Variable latentCloudy = variables.newMultinomialVariable("latentCloudy", Arrays.asList("TRUE", "FALSE"));

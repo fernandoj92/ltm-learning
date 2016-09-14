@@ -36,9 +36,7 @@ public class LTVariablesTest {
 
         /* Creates the LTM structure (LTDAG) */
 
-        // The ClassLoader adds a "/" at the beginning of the path that makes it throw an exception when loading
-        String resourcePath = getClass().getResource("/sprinklerDataHidden.arff").getPath().substring(1);
-        DataStream<DataInstance> data  = DataStreamLoader.open(resourcePath);
+        DataStream<DataInstance> data  = DataStreamLoader.open("datasets/ferjorosaData/sprinklerDataHidden.arff");
 
         variables = new Variables(data.getAttributes());
         Variable latentCloudy = variables.newMultinomialVariable("latentCloudy", Arrays.asList("TRUE", "FALSE"));
@@ -72,13 +70,6 @@ public class LTVariablesTest {
         } catch (Exception e){
             org.junit.Assert.assertTrue(false);
         }
-
-        /* Correctly creates a Latent variable from a variable that was previously present in the LTVariables object */
-
-        ltCloudy = ltVariables.newLatentVariable(
-                variables.newMultinomialVariable("latentCloudy", Arrays.asList("TRUE", "FALSE")), 0);
-
-        Assert.assertTrue(ltVariables.getLatentVariables().contains(ltCloudy));
     }
 
     @Test

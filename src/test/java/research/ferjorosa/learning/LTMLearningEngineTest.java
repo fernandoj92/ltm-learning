@@ -26,10 +26,8 @@ public class LTMLearningEngineTest {
     @Test
     public void testLearnUnidimensionalLTM(){
 
-        // The ClassLoader adds a "/" at the beginning of the path that makes it throw an exception when loading
-        String resourcePath = getClass().getResource("/Asia_train.arff").getPath().substring(1);
-        DataStream<DataInstance> data  = DataStreamLoader.open(resourcePath);
-        DataStream<DataInstance> data2  = DataStreamLoader.open(resourcePath);
+        DataStream<DataInstance> data  = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
+        DataStream<DataInstance> data2  = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
 
         // Creates a naive bayes model using the core module
         SVB parameterLearningAlgorithm = new SVB();
@@ -70,9 +68,7 @@ public class LTMLearningEngineTest {
     @Test
     public void testLearn2dimensionalLTM(){
 
-        // The ClassLoader adds a "/" at the beginning of the path that makes it throw an exception when loading
-        String resourcePath = getClass().getResource("/Asia_train.arff").getPath().substring(1);
-        DataStream<DataInstance> data  = DataStreamLoader.open(resourcePath);
+        DataStream<DataInstance> data  = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
 
         List<Attribute> allAttributes = data.getAttributes().getFullListOfAttributes();
         List<Attribute> leftAttributes = new ArrayList<>();
@@ -106,8 +102,7 @@ public class LTMLearningEngineTest {
     @Test
     public void testLearnFlatLTM(){
 
-        // The ClassLoader adds a "/" at the beginning of the path that makes it throw an exception when loading
-        String resourcePath = getClass().getResource("/Asia_train.arff").getPath().substring(1);
+        String resourcePath = "datasets/ferjorosaData/Asia_train.arff";
         DataStream<DataInstance> data  = DataStreamLoader.open(resourcePath);
         DataStream<DataInstance> data2  = DataStreamLoader.open(resourcePath);
         DataStream<DataInstance> data3  = DataStreamLoader.open(resourcePath);
@@ -160,7 +155,8 @@ public class LTMLearningEngineTest {
         /* Assertions */
 
         Assert.assertEquals(flatLTM.getScore(), twoDimensionalLTM.getScore(), 0);
-        Assert.assertEquals(flatLTM.getLtdag().getObservedVariables(), twoDimensionalLTM.getLtdag().getObservedVariables());
+        Assert.assertEquals(flatLTM.getLtdag().getObservedVariables().size(), twoDimensionalLTM.getLtdag().getObservedVariables().size());
+        Assert.assertEquals(flatLTM.getLtdag().getObservedVariables().size(), data.getAttributes().getNumberOfAttributes());
         Assert.assertEquals(flatLTM.getLtdag().getLTVariables().size(), twoDimensionalLTM.getLtdag().getLTVariables().size());
         Assert.assertEquals(flatLTM.getLtdag().getDAG().getParentSets().size(), twoDimensionalLTM.getLtdag().getDAG().getParentSets().size());
     }

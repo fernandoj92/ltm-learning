@@ -22,9 +22,7 @@ public class SymmetricPairTest {
     @Before
     public void createPairContents(){
 
-        // The ClassLoader adds a "/" at the beginning of the path that makes it throw an exception when loading
-        String resourcePath = getClass().getResource("/sprinklerDataHidden.arff").getPath().substring(1);
-        DataStream<DataInstance> data  = DataStreamLoader.open(resourcePath);
+        DataStream<DataInstance> data  = DataStreamLoader.open("datasets/ferjorosaData/sprinklerDataHidden.arff");
 
         List<Attribute> attributes = data.getAttributes().getFullListOfAttributes();
 
