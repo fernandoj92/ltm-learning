@@ -25,9 +25,10 @@ public class ApproximateBIConfig {
 
     /**
      * Creates a specified configuration for the Approximate Bridged Islands algorithm.
-     * @param maxIslandSize the
-     * @param baseLvCardinality
-     * @param udTestThreshold
+     * @param maxIslandSize the maximum allowed number of observer variables in a single cluster (island),
+     *                      under a single latent variable.
+     * @param baseLvCardinality the base cardinality of every Latent variable created in the algorithm.
+     * @param udTestThreshold the percentage value used in the UD test.
      */
     public ApproximateBIConfig(int maxIslandSize, int baseLvCardinality, double udTestThreshold) {
         this.maxIslandSize = maxIslandSize;

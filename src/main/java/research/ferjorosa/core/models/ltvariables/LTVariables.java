@@ -6,6 +6,7 @@ import eu.amidst.core.variables.Variables;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 'Variables' class equivalent for LTVariables. Wraps its functionality and adds another layer needed for the
@@ -85,7 +86,9 @@ public class LTVariables{
      * @return The newly created observed variable.
      */
     public ObservedVariable newObservedVariable(Variable variable){
-        if(!variables.contains(variable))
+
+        // Given that the AMIDST toolbox doesn't provide an unique ID for the variables, i chose to use the hashCode
+        if(!variables.stream().map(x->x.hashCode()).collect(Collectors.toList()).contains(variable.hashCode()))
             throw new IllegalArgumentException("Variable doesn't belong to the LTVariables object");
 
         ObservedVariable observedVar = new ObservedVariable(variable);
@@ -100,7 +103,7 @@ public class LTVariables{
      * @return The newly created latent variable.
      */
     public LatentVariable newLatentVariable(Variable variable, int index){
-        if(!variables.contains(variable))
+        if(!variables.stream().map(x->x.hashCode()).collect(Collectors.toList()).contains(variable.hashCode()))
             throw new IllegalArgumentException("Variable doesn't belong to the LTVariables object");
 
         LatentVariable latentVar = new LatentVariable(variable, index);

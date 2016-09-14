@@ -23,6 +23,8 @@ public class LikelihoodFading implements ConceptDriftMeasure {
     /**
      * Creates an instance of this measure by passing the parameter learning algorithm used to learn
      * the one-batch model that is going to be compared with the updated model in the concept drift check.
+     * @param parameterLearningAlgorithm the parameter learning algorithm used to learn one-batch model that
+     *                                   is going to be compared with the updated model in the concept drift check
      */
     public LikelihoodFading(ParameterLearningAlgorithm parameterLearningAlgorithm){
         this.ltmLearningEngine = new LTMLearningEngine(parameterLearningAlgorithm);

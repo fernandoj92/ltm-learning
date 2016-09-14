@@ -83,6 +83,7 @@ public class LTM {
      * Approximate Bridged Islands Algorithm).
      *
      * @param batch a {@link DataOnMemory} object that is going to be used to learn the model.
+     * @return returns the score of the LTM for the passed batch of data
      */
     public double updateModel(DataOnMemory<DataInstance> batch){
 

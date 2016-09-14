@@ -19,8 +19,8 @@ public class SymmetricPair<A, B> {
 
     /**
      * Creates a new instance
-     * @param first
-     * @param second
+     * @param first first element of the pair
+     * @param second second element of the pair
      */
     public SymmetricPair(A first, B second) {
         super();

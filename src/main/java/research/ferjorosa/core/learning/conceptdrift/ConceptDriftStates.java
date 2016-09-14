@@ -2,9 +2,11 @@ package research.ferjorosa.core.learning.conceptdrift;
 
 /**
  * Enumerates all the possible concept drift states:
- * <li>{@link #CONCEPT_SHIFT}</li>
- * <li>{@link #CONCEPT_DRIFT}</li>
- * <li>{@link #NONE}</li>
+ * <ul>
+ *  <li>{@link #CONCEPT_SHIFT}</li>
+ *  <li>{@link #CONCEPT_DRIFT}</li>
+ *  <li>{@link #NONE}</li>
+ * </ul>
  */
 public enum ConceptDriftStates {
 
