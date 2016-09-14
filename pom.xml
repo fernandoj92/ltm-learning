@@ -10,7 +10,7 @@
     <name>Ltm Learning</name>
     <version>0.1.0</version> <!-- The 0.2.0 version would be released when all the known bugs are fixed -->
 
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <url>https://github.com/fernandoj92/ltm-learning</url>
 
