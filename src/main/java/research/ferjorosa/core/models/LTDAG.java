@@ -25,7 +25,7 @@ public class LTDAG {
     private DAG dag;
 
     /**
-     * Creates an instance of the class from a set of LT Variables
+     * Creates an instance of the class from a set of LT Variables.
      * @param ltVariables the set of variables of type {@link LTVariables}.
      */
     public LTDAG(LTVariables ltVariables){
@@ -58,17 +58,17 @@ public class LTDAG {
     }
 
     /**
-     * Returns the internal DAG, which contains the core functionality of the DAG
-     * @return the internal DAG
+     * Returns the internal DAG, which contains the core functionality of the DAG.
+     * @return the internal DAG.
      */
     public DAG getDAG(){
         return dag;
     }
 
     /**
-     * Adds a new parent to a variable if the LTM restriction is satisfied
-     * @param variable the variable
-     * @param parent the parent variable that will be added
+     * Adds a new parent to a variable if the LTM restriction is satisfied.
+     * @param variable the variable.
+     * @param parent the parent variable that will be added.
      */
     public void addParent(LTVariable variable, LTVariable parent){
         // LTM restriction

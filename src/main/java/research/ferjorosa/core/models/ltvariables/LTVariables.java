@@ -57,8 +57,8 @@ public class LTVariables{
     }
 
     /**
-     * Returns the number of LTVariables contained (both observed and latent variables)
-     * @return the number of LTVariables contained (both observed and latent variables)
+     * Returns the number of LTVariables contained (both observed and latent variables).
+     * @return the number of LTVariables contained (both observed and latent variables).
      */
     public int size(){
         return observedVariables.size() + latentVariables.size();

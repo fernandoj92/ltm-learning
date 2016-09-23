@@ -6,7 +6,7 @@ import eu.amidst.core.learning.parametric.ParameterLearningAlgorithm;
 import eu.amidst.core.models.BayesianNetwork;
 
 /**
- * Latent Tree Model class that is returned by the Learning Engines. It is structure is fully represented by the
+ * The Latent Tree Model class that is returned by the Learning algorithms / engines. It is structure is fully represented by the
  * LTDAG class. It also contains a Bayesian network object, representing the fully learnt model and finally the
  * model score value (depends on the parameter learning algorithm used) for the set of data instances used to
  * learn it.
@@ -22,10 +22,10 @@ public class LTM {
     /** The parameter learning algorihtm instance that stores the model and its score. */
     private ParameterLearningAlgorithm parameterLearningAlgorithm;
 
-    /** The score returned by the model for the last batch of data */
+    /** The score returned by the model for the last batch of data. */
     private double lastBatchScore;
 
-    /** When calling updateModel() it is possible to update*/
+    /** When calling updateModel() it is possible to update. */
     private double updatedScore;
 
     /**

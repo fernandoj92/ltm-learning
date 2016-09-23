@@ -8,7 +8,7 @@ import eu.amidst.core.variables.Variable;
 public interface LTVariable {
     /**
      * Returns the wrapped 'Variable' object.
-     * @return the wrapped 'Variable' object
+     * @return the wrapped 'Variable' object.
      */
     Variable getVariable();
 }

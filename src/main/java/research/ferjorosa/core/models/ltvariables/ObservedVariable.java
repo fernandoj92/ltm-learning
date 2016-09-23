@@ -5,12 +5,12 @@ import eu.amidst.core.variables.DistributionTypeEnum;
 import eu.amidst.core.variables.Variable;
 
 /**
- * Normally observed variable, its data is complete and it will be considered an attribute when doing clustering
+ * Normally observed variable, its data is complete and it will be considered an attribute when doing clustering.
  * TODO: Develop methods that allow continuous variables, in an hybrid or complete way
  */
 public class ObservedVariable implements LTVariable {
 
-    /** Represents the Variable object, which contains its core functionality */
+    /** Represents the Variable object, which contains its core functionality. */
     private Variable variable;
 
     /**
@@ -26,8 +26,8 @@ public class ObservedVariable implements LTVariable {
     }
 
     /**
-     * Returns the Variable object
-     * @return the accessible variable
+     * Returns the Variable object.
+     * @return the accessible variable.
      */
     public Variable getVariable(){
         return this.variable;
