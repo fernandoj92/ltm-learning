@@ -4,10 +4,13 @@ import eu.amidst.core.datastream.DataInstance;
 import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.learning.parametric.ParameterLearningAlgorithm;
+import org.apache.commons.lang3.NotImplementedException;
+import research.ferjorosa.core.execution.ExecutionResult;
 import research.ferjorosa.core.learning.stream.conceptdrift.ConceptDriftStates;
 import research.ferjorosa.core.learning.stream.conceptdrift.ConceptDriftMeasure;
 import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
 import research.ferjorosa.core.models.LTM;
+import rx.Observable;
 
 /**
  * This class allows to learn a changing Latent Tree Model from a streaming of data batches. It requires a structural
@@ -20,12 +23,13 @@ import research.ferjorosa.core.models.LTM;
  * - Concept shift: Abrupt changes in the model. It requires to learn a brand new model.
  * - Not enough change: It keeps the current model.
  *
+ * TODO: Reestructurar completamente su comportamiento
  * TODO: Revisar el nombre del interfaz de Fading learner y tmb el nombre del atributo de dicho tipo de esta clase.
  * TODO: Quizas seria posible evaluar que partes del model son las que peor resultados da y actualizar solo una parte del modelo.
  * TODO: Es necesario un método para parar el streaming (tras X iteraciones o "manualmente" cambiando la constante streamIsRunning)
  *       para ello seguramente haya que hacer uso de varios hilos (Peligro)
  */
-public class SALL {
+public class SALL extends StreamLearningAlgorithm{
 
     /** The measure that is going to be used to determine if a concept drift has occurred. */
     private ConceptDriftMeasure conceptDriftMeasure;
@@ -180,6 +184,10 @@ public class SALL {
             // Nothing needs to be changed
             default : break;
         }
+    }
+
+    public Observable<ExecutionResult> execute(){
+        throw new NotImplementedException("TODO");
     }
 }
 

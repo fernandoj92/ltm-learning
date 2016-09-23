@@ -5,7 +5,11 @@ import eu.amidst.core.datastream.DataInstance;
 import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.learning.parametric.ParameterLearningAlgorithm;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
+import research.ferjorosa.core.execution.ExecutionResult;
+import research.ferjorosa.core.execution.StaticExecution;
+import research.ferjorosa.core.execution.StreamExecution;
 import research.ferjorosa.core.learning.normal.LTMLearningEngine;
+import research.ferjorosa.core.learning.normal.StaticLearningAlgorithm;
 import research.ferjorosa.core.learning.normal.structural.variables.FSSMeasure;
 import research.ferjorosa.core.learning.normal.structural.variables.MutualInformation;
 import research.ferjorosa.core.models.LTM;
@@ -31,7 +35,7 @@ import java.util.stream.Collectors;
  // TODO: calculateSiblingClusters para <= 2 necesita repaso, ya que lo de añadir esas dos variables a dos clusters...no se
  // TODO: Cada learnModel debe resetear las entrañas del algoritmo, ya que sino se queda basura de el anterior aprendizaje
 
-public class ABI implements StructuralLearning {
+public class ABI extends StaticLearningAlgorithm implements StructuralLearning {
 
     /** The measure that is going to be used to select the closest attributes when forming the sibling clusters. */
     private FSSMeasure siblingClustersMeasure;
@@ -135,6 +139,17 @@ public class ABI implements StructuralLearning {
             4.2 -
          */
         return refineModel(ltmLearned);
+    }
+
+    /** */
+    @Override
+    public ExecutionResult execute(DataOnMemory<DataInstance> batch){
+
+        double nanoStart = System.currentTimeMillis();
+        LTM model = this.learnModel(batch);
+        double nanoFinish = System.currentTimeMillis();
+
+        return new ExecutionResult(model, this.getClass().toString(),0, nanoStart, nanoFinish);
     }
 
     /**
