@@ -6,10 +6,10 @@ import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.io.DataStreamLoader;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
-import research.ferjorosa.core.learning.LTMLearningEngine;
-import research.ferjorosa.core.learning.structural.ApproximateBIAlgorithm;
-import research.ferjorosa.core.learning.structural.ApproximateBIConfig;
-import research.ferjorosa.core.learning.structural.StructuralLearning;
+import research.ferjorosa.core.learning.normal.LTMLearningEngine;
+import research.ferjorosa.core.learning.normal.structural.ABI;
+import research.ferjorosa.core.learning.normal.structural.ABIConfig;
+import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
 import research.ferjorosa.core.models.LTM;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class AsiaDataset {
 
         DataStream<DataInstance> data = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
 
-        StructuralLearning structuralLearningAlgorithm = new ApproximateBIAlgorithm(new ApproximateBIConfig());
+        StructuralLearning structuralLearningAlgorithm = new ABI(new ABIConfig());
 
         LTM learntModel = null;
         LTM zhangModel = null;

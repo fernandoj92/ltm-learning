@@ -1,4 +1,4 @@
-package research.ferjorosa.core.learning.conceptdrift;
+package research.ferjorosa.core.learning.stream.conceptdrift;
 
 /**
  * Enumerates all the possible concept drift states:

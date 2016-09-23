@@ -1,12 +1,12 @@
-package research.ferjorosa.core.learning;
+package research.ferjorosa.core.learning.stream;
 
 import eu.amidst.core.datastream.DataInstance;
 import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.learning.parametric.ParameterLearningAlgorithm;
-import research.ferjorosa.core.learning.conceptdrift.ConceptDriftStates;
-import research.ferjorosa.core.learning.conceptdrift.ConceptDriftMeasure;
-import research.ferjorosa.core.learning.structural.StructuralLearning;
+import research.ferjorosa.core.learning.stream.conceptdrift.ConceptDriftStates;
+import research.ferjorosa.core.learning.stream.conceptdrift.ConceptDriftMeasure;
+import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
 import research.ferjorosa.core.models.LTM;
 
 /**
@@ -21,12 +21,11 @@ import research.ferjorosa.core.models.LTM;
  * - Not enough change: It keeps the current model.
  *
  * TODO: Revisar el nombre del interfaz de Fading learner y tmb el nombre del atributo de dicho tipo de esta clase.
- * TODO: No me gusta el hecho de tener el engine de aprender los LTM combinado con el ABI
  * TODO: Quizas seria posible evaluar que partes del model son las que peor resultados da y actualizar solo una parte del modelo.
  * TODO: Es necesario un método para parar el streaming (tras X iteraciones o "manualmente" cambiando la constante streamIsRunning)
  *       para ello seguramente haya que hacer uso de varios hilos (Peligro)
  */
-public class StreamingLTMLearningEngine {
+public class SALL {
 
     /** The measure that is going to be used to determine if a concept drift has occurred. */
     private ConceptDriftMeasure conceptDriftMeasure;
@@ -58,8 +57,8 @@ public class StreamingLTMLearningEngine {
      * @param conceptDriftMeasure the measure being used to distinguish (i.e the likelihood of the data with current model).
      * @param structuralLearningAlgorithm the algorithm used to fully learn a new model.
      */
-    public StreamingLTMLearningEngine(ConceptDriftMeasure conceptDriftMeasure,
-                                      StructuralLearning structuralLearningAlgorithm){
+    public SALL(ConceptDriftMeasure conceptDriftMeasure,
+                StructuralLearning structuralLearningAlgorithm){
         this.conceptDriftMeasure = conceptDriftMeasure;
         this.structuralLearningAlgorithm = structuralLearningAlgorithm;
     }

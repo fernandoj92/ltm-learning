@@ -8,7 +8,7 @@ import eu.amidst.core.io.DataStreamLoader;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
 import eu.amidst.core.models.DAG;
 import eu.amidst.core.utils.DAGGenerator;
-import research.ferjorosa.core.learning.LTMLearningEngine;
+import research.ferjorosa.core.learning.normal.LTMLearningEngine;
 import research.ferjorosa.core.models.LTM;
 import research.ferjorosa.core.util.graph.DirectedTree;
 import research.ferjorosa.core.util.graph.UndirectedGraph;

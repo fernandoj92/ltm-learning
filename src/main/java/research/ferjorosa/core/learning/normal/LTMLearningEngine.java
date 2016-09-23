@@ -1,4 +1,4 @@
-package research.ferjorosa.core.learning;
+package research.ferjorosa.core.learning.normal;
 
 import eu.amidst.core.datastream.Attribute;
 import eu.amidst.core.datastream.Attributes;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 /**
  *  This class takes over the responsibility of creating different kinds of Latent Tree Models. Its methods doesn't learn
- *  the structure from data (to do so, go the classes that implement Structural Learning, i.e ApproximateBIAlgorithm), it
+ *  the structure from data (to do so, go the classes that implement Structural Learning, i.e ABI), it
  *  only learns specifc kinds of LTMs:
  *
  *  - Unidimensional LTM (also called LCM): a Naive Bayes structure with a hidden class variable (latent).

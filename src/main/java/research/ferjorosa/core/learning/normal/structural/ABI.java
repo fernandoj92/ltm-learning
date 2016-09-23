@@ -1,13 +1,13 @@
-package research.ferjorosa.core.learning.structural;
+package research.ferjorosa.core.learning.normal.structural;
 
 import eu.amidst.core.datastream.Attribute;
 import eu.amidst.core.datastream.DataInstance;
 import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.learning.parametric.ParameterLearningAlgorithm;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
-import research.ferjorosa.core.learning.LTMLearningEngine;
-import research.ferjorosa.core.learning.structural.variables.FSSMeasure;
-import research.ferjorosa.core.learning.structural.variables.MutualInformation;
+import research.ferjorosa.core.learning.normal.LTMLearningEngine;
+import research.ferjorosa.core.learning.normal.structural.variables.FSSMeasure;
+import research.ferjorosa.core.learning.normal.structural.variables.MutualInformation;
 import research.ferjorosa.core.models.LTM;
 import research.ferjorosa.core.models.ltvariables.ObservedVariable;
 import research.ferjorosa.core.util.graph.DirectedTree;
@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  // TODO: calculateSiblingClusters para <= 2 necesita repaso, ya que lo de añadir esas dos variables a dos clusters...no se
  // TODO: Cada learnModel debe resetear las entrañas del algoritmo, ya que sino se queda basura de el anterior aprendizaje
 
-public class ApproximateBIAlgorithm implements StructuralLearning {
+public class ABI implements StructuralLearning {
 
     /** The measure that is going to be used to select the closest attributes when forming the sibling clusters. */
     private FSSMeasure siblingClustersMeasure;
@@ -46,14 +46,14 @@ public class ApproximateBIAlgorithm implements StructuralLearning {
     private ArrayList<LTM> siblingClusters;
 
     /** Configuration parameters for the algorithm. */
-    private ApproximateBIConfig config;
+    private ABIConfig config;
 
     /**
      * Default constructor for the Bridged Islands algorithm. It creates an instance of the algorithm with the
      * "Streaming Variational Bayes" as the parameter learning algorithm and the "Mutual Information" as the FSS Measure
      * @param config configuration parameters for the algorithm.
      */
-    public ApproximateBIAlgorithm(ApproximateBIConfig config){
+    public ABI(ABIConfig config){
 
         // Defines the default parameter learning algorithm
         SVB streamingVariationalBayes = new SVB();
@@ -74,7 +74,7 @@ public class ApproximateBIAlgorithm implements StructuralLearning {
      * @param parameterLearningAlgorithm the selected parameter learning algorithm that is going to be used after
      *                                   learning the LTM structure.
      */
-    public ApproximateBIAlgorithm(ApproximateBIConfig config, ParameterLearningAlgorithm parameterLearningAlgorithm){
+    public ABI(ABIConfig config, ParameterLearningAlgorithm parameterLearningAlgorithm){
         this.config = config;
         this.ltmLearner = new LTMLearningEngine(parameterLearningAlgorithm);
         this.siblingClustersMeasure = new MutualInformation();
@@ -88,7 +88,7 @@ public class ApproximateBIAlgorithm implements StructuralLearning {
      * @param siblingClustersMeasure the measure that is going to be used to select the closest attributes when forming
      *                               the sibling clusters.
      */
-    public ApproximateBIAlgorithm(ApproximateBIConfig config, ParameterLearningAlgorithm parameterLearningAlgorithm, FSSMeasure siblingClustersMeasure){
+    public ABI(ABIConfig config, ParameterLearningAlgorithm parameterLearningAlgorithm, FSSMeasure siblingClustersMeasure){
         this.config = config;
         this.ltmLearner = new LTMLearningEngine(parameterLearningAlgorithm);
         this.siblingClustersMeasure = siblingClustersMeasure;

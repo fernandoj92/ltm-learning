@@ -6,10 +6,10 @@ import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.io.DataStreamLoader;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
 import eu.amidst.core.variables.Variables;
-import research.ferjorosa.core.learning.LTMLearningEngine;
-import research.ferjorosa.core.learning.structural.ApproximateBIAlgorithm;
-import research.ferjorosa.core.learning.structural.ApproximateBIConfig;
-import research.ferjorosa.core.learning.structural.StructuralLearning;
+import research.ferjorosa.core.learning.normal.LTMLearningEngine;
+import research.ferjorosa.core.learning.normal.structural.ABI;
+import research.ferjorosa.core.learning.normal.structural.ABIConfig;
+import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
 import research.ferjorosa.core.models.LTDAG;
 import research.ferjorosa.core.models.LTM;
 import research.ferjorosa.core.models.ltvariables.LTVariables;
@@ -24,7 +24,7 @@ import java.util.Arrays;
 public class AlarmDataSetUpdateModel {
 
     public static void main(String[] args) throws Exception {
-        StructuralLearning structuralLearningAlgorithm = new ApproximateBIAlgorithm(new ApproximateBIConfig());
+        StructuralLearning structuralLearningAlgorithm = new ABI(new ABIConfig());
 
         LTM updatedModel = null;
         LTM zhangModel = null;

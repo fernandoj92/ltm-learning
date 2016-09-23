@@ -5,9 +5,9 @@ import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.io.DataStreamLoader;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
-import research.ferjorosa.core.learning.structural.ApproximateBIAlgorithm;
-import research.ferjorosa.core.learning.structural.ApproximateBIConfig;
-import research.ferjorosa.core.learning.structural.StructuralLearning;
+import research.ferjorosa.core.learning.normal.structural.ABI;
+import research.ferjorosa.core.learning.normal.structural.ABIConfig;
+import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
 import research.ferjorosa.core.models.LTM;
 
 /**
@@ -26,7 +26,7 @@ public class AlarmDataset {
         //We fix the number of cores we want to exploit
         //parameterLearningAlgorithm.setNCores(4);
 
-        StructuralLearning structuralLearningAlgorithm = new ApproximateBIAlgorithm(new ApproximateBIConfig(), parameterLearningAlgorithm);
+        StructuralLearning structuralLearningAlgorithm = new ABI(new ABIConfig(), parameterLearningAlgorithm);
 
         LTM learntModel = null;
 

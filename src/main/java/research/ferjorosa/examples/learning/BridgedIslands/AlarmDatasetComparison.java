@@ -8,10 +8,10 @@ import eu.amidst.core.learning.parametric.bayesian.ParallelSVB;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
 import eu.amidst.core.utils.DAGGenerator;
 import eu.amidst.core.variables.Variables;
-import research.ferjorosa.core.learning.LTMLearningEngine;
-import research.ferjorosa.core.learning.structural.ApproximateBIAlgorithm;
-import research.ferjorosa.core.learning.structural.ApproximateBIConfig;
-import research.ferjorosa.core.learning.structural.StructuralLearning;
+import research.ferjorosa.core.learning.normal.LTMLearningEngine;
+import research.ferjorosa.core.learning.normal.structural.ABI;
+import research.ferjorosa.core.learning.normal.structural.ABIConfig;
+import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
 import research.ferjorosa.core.models.LTM;
 import research.ferjorosa.core.models.LTDAG;
 import research.ferjorosa.core.models.ltvariables.LTVariables;
@@ -27,7 +27,7 @@ public class AlarmDatasetComparison {
 
     public static void main(String[] args) throws Exception {
 
-        StructuralLearning structuralLearningAlgorithm = new ApproximateBIAlgorithm(new ApproximateBIConfig());
+        StructuralLearning structuralLearningAlgorithm = new ABI(new ABIConfig());
 
         LTM learntModel = null;
         LTM zhangModel = null;
@@ -260,7 +260,7 @@ public class AlarmDatasetComparison {
         //We fix the number of cores we want to exploit
         parameterLearningAlgorithm.setNCores(4);
 
-        StructuralLearning parallelStructuralLearning = new ApproximateBIAlgorithm(new ApproximateBIConfig(),parameterLearningAlgorithm);
+        StructuralLearning parallelStructuralLearning = new ABI(new ABIConfig(),parameterLearningAlgorithm);
 
         return parallelStructuralLearning.learnModel(batch);
     }

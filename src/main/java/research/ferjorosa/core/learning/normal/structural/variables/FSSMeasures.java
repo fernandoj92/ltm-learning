@@ -1,4 +1,4 @@
-package research.ferjorosa.core.learning.structural.variables;
+package research.ferjorosa.core.learning.normal.structural.variables;
 
 /**
  * Created by fernando on 5/09/16.

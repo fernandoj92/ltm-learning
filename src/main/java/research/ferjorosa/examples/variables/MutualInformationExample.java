@@ -5,7 +5,7 @@ import eu.amidst.core.datastream.DataInstance;
 import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.io.DataStreamLoader;
-import research.ferjorosa.core.learning.structural.variables.MutualInformation;
+import research.ferjorosa.core.learning.normal.structural.variables.MutualInformation;
 
 /**
  * Created by Fernando on 3/7/2016.

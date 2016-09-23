@@ -1,4 +1,4 @@
-package research.ferjorosa.core.learning.structural.variables;
+package research.ferjorosa.core.learning.normal.structural.variables;
 
 import eu.amidst.core.datastream.Attribute;
 import eu.amidst.core.datastream.DataInstance;

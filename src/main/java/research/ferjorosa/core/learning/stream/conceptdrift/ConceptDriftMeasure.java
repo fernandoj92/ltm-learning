@@ -1,4 +1,4 @@
-package research.ferjorosa.core.learning.conceptdrift;
+package research.ferjorosa.core.learning.stream.conceptdrift;
 
 import eu.amidst.core.datastream.DataInstance;
 import eu.amidst.core.datastream.DataOnMemory;

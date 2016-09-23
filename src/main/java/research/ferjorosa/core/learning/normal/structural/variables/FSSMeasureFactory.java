@@ -1,6 +1,6 @@
-package research.ferjorosa.core.learning.structural.variables;
+package research.ferjorosa.core.learning.normal.structural.variables;
 
-import static research.ferjorosa.core.learning.structural.variables.FSSMeasures.MUTUAL_INFORMATION;
+import static research.ferjorosa.core.learning.normal.structural.variables.FSSMeasures.MUTUAL_INFORMATION;
 
 /**
  * Created by fernando on 5/09/16.

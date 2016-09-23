@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Utility class that represents a Directed Tree, used for representing connections between LTVariables
  * when a structural algorithm is being used to create a Latent Tree Model
- * (i.e @link mt.ferjorosa.core.learning.structural.ApproximateBIAlgorithm}).
+ * (i.e @link mt.ferjorosa.core.learning.structural.ABI}).
  */
 public class DirectedTree {
 

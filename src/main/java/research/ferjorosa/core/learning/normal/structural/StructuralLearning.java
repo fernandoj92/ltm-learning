@@ -1,4 +1,4 @@
-package research.ferjorosa.core.learning.structural;
+package research.ferjorosa.core.learning.normal.structural;
 
 import eu.amidst.core.datastream.DataInstance;
 import eu.amidst.core.datastream.DataOnMemory;

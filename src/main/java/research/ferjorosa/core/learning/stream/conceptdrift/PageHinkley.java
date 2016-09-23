@@ -1,9 +1,9 @@
-package research.ferjorosa.core.learning.conceptdrift;
+package research.ferjorosa.core.learning.stream.conceptdrift;
 
 import eu.amidst.core.datastream.DataInstance;
 import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.learning.parametric.ParameterLearningAlgorithm;
-import research.ferjorosa.core.learning.LTMLearningEngine;
+import research.ferjorosa.core.learning.normal.LTMLearningEngine;
 import research.ferjorosa.core.models.LTM;
 
 import java.util.ArrayList;

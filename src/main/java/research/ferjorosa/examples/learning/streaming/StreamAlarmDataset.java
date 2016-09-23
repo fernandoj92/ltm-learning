@@ -5,12 +5,12 @@ import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.io.DataStreamLoader;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
-import research.ferjorosa.core.learning.StreamingLTMLearningEngine;
-import research.ferjorosa.core.learning.conceptdrift.ConceptDriftMeasure;
-import research.ferjorosa.core.learning.conceptdrift.LikelihoodFading;
-import research.ferjorosa.core.learning.structural.ApproximateBIAlgorithm;
-import research.ferjorosa.core.learning.structural.ApproximateBIConfig;
-import research.ferjorosa.core.learning.structural.StructuralLearning;
+import research.ferjorosa.core.learning.stream.SALL;
+import research.ferjorosa.core.learning.stream.conceptdrift.ConceptDriftMeasure;
+import research.ferjorosa.core.learning.stream.conceptdrift.LikelihoodFading;
+import research.ferjorosa.core.learning.normal.structural.ABI;
+import research.ferjorosa.core.learning.normal.structural.ABIConfig;
+import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
 
 /**
  * Created by Fernando on 6/25/2016.
@@ -25,10 +25,10 @@ public class StreamAlarmDataset {
         SVB mainPLalgorihtm = new SVB();
         SVB driftPLalgorithm = new SVB();
 
-        StructuralLearning structuralLearningAlgorithm = new ApproximateBIAlgorithm(new ApproximateBIConfig(), mainPLalgorihtm);
+        StructuralLearning structuralLearningAlgorithm = new ABI(new ABIConfig(), mainPLalgorihtm);
 
         ConceptDriftMeasure driftMeasure = new LikelihoodFading(driftPLalgorithm);
-        StreamingLTMLearningEngine streamEngine = new StreamingLTMLearningEngine(driftMeasure,structuralLearningAlgorithm);
+        SALL streamEngine = new SALL(driftMeasure,structuralLearningAlgorithm);
 
         boolean start = true;
 

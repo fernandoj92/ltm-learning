@@ -2,7 +2,7 @@ package research.ferjorosa.learning.structural.variables;
 
 import eu.amidst.core.datastream.*;
 import eu.amidst.core.io.DataStreamLoader;
-import research.ferjorosa.core.learning.structural.variables.MutualInformation;
+import research.ferjorosa.core.learning.normal.structural.variables.MutualInformation;
 import research.ferjorosa.core.util.pair.SymmetricPair;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,9 +1,9 @@
-package research.ferjorosa.core.learning.structural;
+package research.ferjorosa.core.learning.normal.structural;
 
 /**
  * Configuration object for the Approximate Bridged Islands algorithm.
  */
-public class ApproximateBIConfig {
+public class ABIConfig {
 
     /** A restriction about the maximum number of observed variables in a single cluster, under a single latent variable. */
     private int maxIslandSize = 30;
@@ -17,7 +17,7 @@ public class ApproximateBIConfig {
     /**
      * Creates a default configuration for the Approximate Bridged Islands algorithm.
      */
-    public ApproximateBIConfig(){
+    public ABIConfig(){
         this.maxIslandSize = 30;
         this.baseLvCardinality = 2;
         this.udTestThreshold = 3.0;
@@ -30,7 +30,7 @@ public class ApproximateBIConfig {
      * @param baseLvCardinality the base cardinality of every Latent variable created in the algorithm.
      * @param udTestThreshold the percentage value used in the UD test.
      */
-    public ApproximateBIConfig(int maxIslandSize, int baseLvCardinality, double udTestThreshold) {
+    public ABIConfig(int maxIslandSize, int baseLvCardinality, double udTestThreshold) {
         this.maxIslandSize = maxIslandSize;
         this.baseLvCardinality = baseLvCardinality;
         this.udTestThreshold = udTestThreshold;
