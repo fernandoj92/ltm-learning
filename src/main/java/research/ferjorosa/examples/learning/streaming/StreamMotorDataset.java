@@ -5,6 +5,7 @@ import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.io.DataStreamLoader;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
+import research.ferjorosa.core.learning.normal.StaticLearningAlgorithm;
 import research.ferjorosa.core.learning.stream.SALL;
 import research.ferjorosa.core.learning.stream.conceptdrift.ConceptDriftMeasure;
 import research.ferjorosa.core.learning.stream.conceptdrift.PageHinkley;
@@ -25,10 +26,10 @@ public class StreamMotorDataset {
         SVB mainPLalgorihtm = new SVB();
         SVB driftPLalgorithm = new SVB();
 
-        StructuralLearning structuralLearningAlgorithm = new ABI(new ABIConfig(), mainPLalgorihtm);
+        StaticLearningAlgorithm staticLearningAlgorithm = new ABI(new ABIConfig(), mainPLalgorihtm);
 
         ConceptDriftMeasure driftMeasure = new PageHinkley(100, 0,driftPLalgorithm);
-        SALL streamEngine = new SALL(driftMeasure,structuralLearningAlgorithm);
+        SALL streamEngine = new SALL(driftMeasure,staticLearningAlgorithm);
 
         boolean start = true;
 

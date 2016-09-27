@@ -100,4 +100,19 @@ public class ExecutionResult {
     public double getNanoExecutionTime(){
         return this.nanoFinish - this.nanoStart;
     }
+
+    /**
+     * Returns a textual representation of this ExecutionResult.
+     * @return a String description of this ExecutionResult.
+     */
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        str.append("Execution ID: "+this.getUniqueID()+"\n");
+        str.append("Learning algorithm: "+ this.getAlgorithm()+"\n");
+        str.append(this.getModel().getLearntBayesianNetwork().toString()+"\n");
+        str.append("Score: "+this.getModel().getScore()+"\n");
+        str.append("Learning time:" + this.getNanoExecutionTime()+" ms");
+
+        return str.toString();
+    }
 }

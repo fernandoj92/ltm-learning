@@ -9,6 +9,7 @@ import eu.amidst.core.learning.parametric.bayesian.SVB;
 import eu.amidst.core.utils.DAGGenerator;
 import eu.amidst.core.variables.Variables;
 import research.ferjorosa.core.learning.normal.LTMLearningEngine;
+import research.ferjorosa.core.learning.normal.StaticLearningAlgorithm;
 import research.ferjorosa.core.learning.normal.structural.ABI;
 import research.ferjorosa.core.learning.normal.structural.ABIConfig;
 import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
@@ -27,7 +28,7 @@ public class AlarmDatasetComparison {
 
     public static void main(String[] args) throws Exception {
 
-        StructuralLearning structuralLearningAlgorithm = new ABI(new ABIConfig());
+        StaticLearningAlgorithm staticLearningAlgorithm = new ABI(new ABIConfig());
 
         LTM learntModel = null;
         LTM zhangModel = null;
@@ -37,7 +38,7 @@ public class AlarmDatasetComparison {
         DataStream<DataInstance> data = DataStreamLoader.open("datasets/ferjorosaData/Alarm_train.arff");
         long oneCoreStartTime = System.currentTimeMillis();
         for (DataOnMemory<DataInstance> batch : data.iterableOverBatches(1000)){
-            learntModel = structuralLearningAlgorithm.learnModel(batch);
+            learntModel = staticLearningAlgorithm.learnModel(batch);
         }
         long oneCoreEstimatedTime = System.currentTimeMillis() - oneCoreStartTime;
 /*
@@ -260,8 +261,8 @@ public class AlarmDatasetComparison {
         //We fix the number of cores we want to exploit
         parameterLearningAlgorithm.setNCores(4);
 
-        StructuralLearning parallelStructuralLearning = new ABI(new ABIConfig(),parameterLearningAlgorithm);
+        StaticLearningAlgorithm parallelStaticLearning = new ABI(new ABIConfig(),parameterLearningAlgorithm);
 
-        return parallelStructuralLearning.learnModel(batch);
+        return parallelStaticLearning.learnModel(batch);
     }
 }

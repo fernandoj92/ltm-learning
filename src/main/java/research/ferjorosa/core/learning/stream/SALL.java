@@ -6,6 +6,7 @@ import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.learning.parametric.ParameterLearningAlgorithm;
 import org.apache.commons.lang3.NotImplementedException;
 import research.ferjorosa.core.execution.ExecutionResult;
+import research.ferjorosa.core.learning.normal.StaticLearningAlgorithm;
 import research.ferjorosa.core.learning.stream.conceptdrift.ConceptDriftStates;
 import research.ferjorosa.core.learning.stream.conceptdrift.ConceptDriftMeasure;
 import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
@@ -38,7 +39,7 @@ public class SALL extends StreamLearningAlgorithm{
     private DataStream<DataInstance> dataStream;
 
     /** The structural learning algorithm used to learn the model when a Concept Shift occurs. */
-    private StructuralLearning structuralLearningAlgorithm;
+    private StaticLearningAlgorithm staticLearningAlgorithm;
 
     /** The parameter learning algorithm used to update the model when a new batch of data arrives. */
     private ParameterLearningAlgorithm parameterLearningAlgorithm;
@@ -59,12 +60,12 @@ public class SALL extends StreamLearningAlgorithm{
      * {@link ConceptDriftStates} that have happened and the structural learning algorithm that is going to be used when
      * a concept drift has occurred.
      * @param conceptDriftMeasure the measure being used to distinguish (i.e the likelihood of the data with current model).
-     * @param structuralLearningAlgorithm the algorithm used to fully learn a new model.
+     * @param staticLearningAlgorithm the algorithm used to fully learn a new model.
      */
     public SALL(ConceptDriftMeasure conceptDriftMeasure,
-                StructuralLearning structuralLearningAlgorithm){
+                StaticLearningAlgorithm staticLearningAlgorithm){
         this.conceptDriftMeasure = conceptDriftMeasure;
-        this.structuralLearningAlgorithm = structuralLearningAlgorithm;
+        this.staticLearningAlgorithm = staticLearningAlgorithm;
     }
 
     /**
@@ -98,7 +99,7 @@ public class SALL extends StreamLearningAlgorithm{
      * @param batch the first batch used to fully learn the model.
      */
     public void initLearning(DataOnMemory<DataInstance> batch){
-        this.currentModel = structuralLearningAlgorithm.learnModel(batch);
+        this.currentModel = staticLearningAlgorithm.learnModel(batch);
     }
 
     /**
@@ -137,7 +138,7 @@ public class SALL extends StreamLearningAlgorithm{
 
                 // If there is a concept shift, then it learns a new model using the new batch as seed.
                 case CONCEPT_DRIFT:
-                    this.currentModel = structuralLearningAlgorithm.learnModel(batch);
+                    this.currentModel = staticLearningAlgorithm.learnModel(batch);
                     iterationLastDrift = currentIteration;
                     conceptDriftMeasure.reset();
                     break;
@@ -176,7 +177,7 @@ public class SALL extends StreamLearningAlgorithm{
 
             // If there is a concept shift, then it learns a new model using the new batch as seed.
             case CONCEPT_DRIFT:
-                this.currentModel = structuralLearningAlgorithm.learnModel(batch);
+                this.currentModel = staticLearningAlgorithm.learnModel(batch);
                 iterationLastDrift = currentIteration;
                 conceptDriftMeasure.reset();
                 break;

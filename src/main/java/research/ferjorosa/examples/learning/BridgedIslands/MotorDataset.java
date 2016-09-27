@@ -5,6 +5,7 @@ import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.io.DataStreamLoader;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
+import research.ferjorosa.core.learning.normal.StaticLearningAlgorithm;
 import research.ferjorosa.core.learning.normal.structural.ABI;
 import research.ferjorosa.core.learning.normal.structural.ABIConfig;
 import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
@@ -22,7 +23,7 @@ public class MotorDataset {
         //We create a ParallelSVB object
         SVB parameterLearningAlgorithm = new SVB();
 
-        StructuralLearning structuralLearningAlgorithm = new ABI(new ABIConfig(), parameterLearningAlgorithm);
+        StaticLearningAlgorithm staticLearningAlgorithm = new ABI(new ABIConfig(), parameterLearningAlgorithm);
 
         LTM learntModel = null;
 
@@ -31,7 +32,7 @@ public class MotorDataset {
         for (DataOnMemory<DataInstance> batch : data.iterableOverBatches(1000)){
             cont++;
             if(cont == 1)
-                learntModel = structuralLearningAlgorithm.learnModel(batch);
+                learntModel = staticLearningAlgorithm.learnModel(batch);
         }
         long estimatedTime = System.currentTimeMillis() - startTime;
 

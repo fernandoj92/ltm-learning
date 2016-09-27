@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  // TODO: calculateSiblingClusters para <= 2 necesita repaso, ya que lo de añadir esas dos variables a dos clusters...no se
  // TODO: Cada learnModel debe resetear las entrañas del algoritmo, ya que sino se queda basura de el anterior aprendizaje
 
-public class ABI extends StaticLearningAlgorithm implements StructuralLearning {
+public class ABI extends StaticLearningAlgorithm {
 
     /** The measure that is going to be used to select the closest attributes when forming the sibling clusters. */
     private FSSMeasure siblingClustersMeasure;
@@ -149,7 +149,7 @@ public class ABI extends StaticLearningAlgorithm implements StructuralLearning {
         LTM model = this.learnModel(batch);
         double nanoFinish = System.currentTimeMillis();
 
-        return new ExecutionResult(model, this.getClass().toString(),0, nanoStart, nanoFinish);
+        return new ExecutionResult(model, "Approximate Bridged Islands",0, nanoStart, nanoFinish);
     }
 
     /**

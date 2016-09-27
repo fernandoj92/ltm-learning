@@ -5,6 +5,7 @@ import eu.amidst.core.datastream.DataOnMemory;
 import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.io.DataStreamLoader;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
+import research.ferjorosa.core.learning.normal.StaticLearningAlgorithm;
 import research.ferjorosa.core.learning.normal.structural.ABI;
 import research.ferjorosa.core.learning.normal.structural.ABIConfig;
 import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
@@ -27,13 +28,13 @@ public class CoilDataset {
         //We fix the number of cores we want to exploit
         //parameterLearningAlgorithm.setNCores(4);
 
-        StructuralLearning structuralLearningAlgorithm = new ABI(new ABIConfig(), parameterLearningAlgorithm);
+        StaticLearningAlgorithm staticLearningAlgorithm = new ABI(new ABIConfig(), parameterLearningAlgorithm);
 
         LTM learntModel = null;
 
         long startTime = System.currentTimeMillis();
         for (DataOnMemory<DataInstance> batch : data.iterableOverBatches(4000)){
-            learntModel = structuralLearningAlgorithm.learnModel(batch);
+            learntModel = staticLearningAlgorithm.learnModel(batch);
         }
         long estimatedTime = System.currentTimeMillis() - startTime;
 

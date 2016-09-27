@@ -7,6 +7,7 @@ import eu.amidst.core.datastream.DataStream;
 import eu.amidst.core.io.DataStreamLoader;
 import eu.amidst.core.learning.parametric.bayesian.SVB;
 import research.ferjorosa.core.learning.normal.LTMLearningEngine;
+import research.ferjorosa.core.learning.normal.StaticLearningAlgorithm;
 import research.ferjorosa.core.learning.normal.structural.ABI;
 import research.ferjorosa.core.learning.normal.structural.ABIConfig;
 import research.ferjorosa.core.learning.normal.structural.StructuralLearning;
@@ -24,14 +25,14 @@ public class AsiaDataset {
 
         DataStream<DataInstance> data = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
 
-        StructuralLearning structuralLearningAlgorithm = new ABI(new ABIConfig());
+        StaticLearningAlgorithm staticLearningAlgorithm = new ABI(new ABIConfig());
 
         LTM learntModel = null;
         LTM zhangModel = null;
 
         long startTime = System.currentTimeMillis();
         for (DataOnMemory<DataInstance> batch : data.iterableOverBatches(100)){
-            learntModel = structuralLearningAlgorithm.learnModel(batch);
+            learntModel = staticLearningAlgorithm.learnModel(batch);
         }
         long estimatedTime = System.currentTimeMillis() - startTime;
 
