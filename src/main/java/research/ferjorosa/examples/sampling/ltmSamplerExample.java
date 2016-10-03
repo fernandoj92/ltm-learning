@@ -14,6 +14,7 @@ import research.ferjorosa.core.learning.normal.structural.ABI;
 import research.ferjorosa.core.learning.normal.structural.ABIConfig;
 import research.ferjorosa.core.models.LTM;
 import research.ferjorosa.core.models.ltvariables.LatentVariable;
+import research.ferjorosa.core.util.sampling.LatentBayesianNetworkSampler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +25,38 @@ import java.util.List;
 public class LtmSamplerExample {
 
     public static void main(String[] args) throws Exception {
+        // DataStream<DataInstance> sampledStream = sampleZhangLTM(100);
+        DataStream<DataInstance> sampledStream = improvedSampleZhangLTM(1000);
+
+        DataStreamWriter.writeDataToFile(sampledStream, "datasets/ferjorosaData/sampled/Asia_zhang_improved_sampled.arff");
+
+        compareModels();
+    }
+
+    private static DataStream<DataInstance> sampleZhangLTM(int nSamples) throws  Exception {
+
+        LTM zhangModel= learnZhangLTM();
+
+        BayesianNetworkSampler bnSample = new BayesianNetworkSampler(zhangModel.getLearntBayesianNetwork());
+        for(LatentVariable ltVariable : zhangModel.getLtdag().getLatentVariables())
+            bnSample.setHiddenVar(ltVariable.getVariable());
+
+        return bnSample.sampleToDataStream(nSamples);
+    }
+
+    private static DataStream<DataInstance> improvedSampleZhangLTM(int nSamples) throws Exception{
+        LTM zhangModel= learnZhangLTM();
+        LatentBayesianNetworkSampler bnSample = new LatentBayesianNetworkSampler(zhangModel.getLearntBayesianNetwork());
+        for(LatentVariable ltVariable : zhangModel.getLtdag().getLatentVariables())
+            bnSample.setLatentVar(ltVariable.getVariable());
+
+        return bnSample.sampleToDataStream(nSamples);
+    }
+
+    private static void compareModels(){
         LTM ABIModel = null;
-        DataStream<DataInstance> data1 = DataStreamLoader.open("datasets/ferjorosaData/Asia_zhang_sampled.arff");
-        //DataStream<DataInstance> data1 = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
+        DataStream<DataInstance> data1 = DataStreamLoader.open("datasets/ferjorosaData/sampled/Asia_zhang_improved_sampled.arff");
+
         StaticLearningAlgorithm staticLearningAlgorithm = new ABI(new ABIConfig());
 
         for (DataOnMemory<DataInstance> batch : data1.iterableOverBatches(1000)){
@@ -36,30 +66,13 @@ public class LtmSamplerExample {
         }
 
         LTM ZhangModel = null;
-        DataStream<DataInstance> data2 = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
+        DataStream<DataInstance> data2 = DataStreamLoader.open("datasets/ferjorosaData/sampled/Asia_zhang_improved_sampled.arff");
 
-        for (DataOnMemory<DataInstance> batch : data2.iterableOverBatches(100)){
+        for (DataOnMemory<DataInstance> batch : data2.iterableOverBatches(1000)){
             ZhangModel = buildZhangLTM(batch);
             System.out.println(ZhangModel.getLearntBayesianNetwork());
             System.out.println("Zhang Score: " + ZhangModel.getScore());
         }
-    }
-
-    private static void sampleZhangLTM() throws  Exception {
-        LTM zhangModel = null;
-        DataStream<DataInstance> data2 = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
-
-        for (DataOnMemory<DataInstance> batch : data2.iterableOverBatches(100)){
-            zhangModel = buildZhangLTM(batch);
-            System.out.println(zhangModel.getLearntBayesianNetwork());
-        }
-
-        BayesianNetworkSampler bnSample = new BayesianNetworkSampler(zhangModel.getLearntBayesianNetwork());
-        //for(LatentVariable ltVariable : zhangModel.getLtdag().getLatentVariables())
-        //    bnSample.setHiddenVar(ltVariable.getVariable());
-
-        DataStream<DataInstance> sampledStream = bnSample.sampleToDataStream(1000);
-        DataStreamWriter.writeDataToFile(sampledStream, "datasets/ferjorosaData/Asia_zhang_sampled2.arff");
     }
 
     private static LTM buildZhangLTM(DataOnMemory<DataInstance> batch){
@@ -85,6 +98,18 @@ public class LtmSamplerExample {
         rightAttributes.add(batch.getAttributes().getAttributeByName("vVisitToAsia"));
 
         return ltmLearner.learn2dimensionalLTM(leftAttributes,rightAttributes,2,2,batch);
+    }
+
+    private static LTM learnZhangLTM(){
+        LTM zhangModel = null;
+        DataStream<DataInstance> data2 = DataStreamLoader.open("datasets/ferjorosaData/Asia_train.arff");
+
+        for (DataOnMemory<DataInstance> batch : data2.iterableOverBatches(100)){
+            zhangModel = buildZhangLTM(batch);
+            //System.out.println(zhangModel.getLearntBayesianNetwork());
+        }
+
+        return zhangModel;
     }
 
 }
