@@ -30,7 +30,6 @@ import java.util.stream.Collectors;
  // TODO: Recordar  al hacer ejemplos o tests de el metodo de generar combinaciones el añadir un comentario en la doc del metodo
  // TODO: Punto 6 del algoritmo
  // TODO: Este algoritmo siempre genera un LCM de 3 variables cuando recibe solo 3 atributos, aunque busque un arbol de 2 LVs, siempre queda igual.
- // TODO: connectSiblingClusters escoge una raiz del MWST de forma aleatoria.
  // TODO: Cambiar la forma en la que se calcula la MI de las variables latentes (rellenar el dataset)
  // TODO: calculateSiblingClusters para <= 2 necesita repaso, ya que lo de añadir esas dos variables a dos clusters...no se
  // TODO: Cada learnModel debe resetear las entrañas del algoritmo, ya que sino se queda basura de el anterior aprendizaje
@@ -482,14 +481,9 @@ public class ABI extends StaticLearningAlgorithm {
         // Once the complete undirected graph has been generated, the MWST is calculated
         UndirectedGraph mwst = UndirectedGraph.obtainMaximumWeightSpanningTree(completeGraph);
 
-        // After calculating the MWST, a random root is selected and the undirected tree is converted into a directed tree.
-        //Random rn = new Random();
-        //int rootIndex = rn.nextInt(mwst.getNVertices());
-        DirectedTree rootedMWST = new DirectedTree(mwst, 0);
-
-        // Finally, a flat-LTM is learnt in relation to the previously calculated MWST
-        return ltmLearner.learnFlatLTM(rootedMWST,siblingClusters,batch);
-
+        // After calculating the MWST, the best rooted tree is selected by building various LTMs
+        // with different roots
+        return searchBestRootedLTM(mwst, batch);
     }
 
     /**
@@ -499,6 +493,27 @@ public class ABI extends StaticLearningAlgorithm {
      */
     private LTM refineModel(LTM ltm){
         return ltm;
+    }
+
+    /**
+     *
+     * @param mwst the maximum weight spanning tree composed with the latent variables of the LTM.
+     * @param batch a {@link DataOnMemory} object that is going to be used to learn the models.
+     * @return the best rooted LTM built from the undirected LTM that form the sibling clusters and the MWST.
+     */
+    private LTM searchBestRootedLTM(UndirectedGraph mwst, DataOnMemory<DataInstance> batch){
+
+        LTM bestRootedLTM = null;
+        double bestScore = Double.NEGATIVE_INFINITY;
+
+        // Iterate through the MWST nodes and build a LTM with each one as the root
+        for (int i= 0; i<mwst.getNVertices(); i++){
+            DirectedTree rootedMWST = new DirectedTree(mwst, i);
+            LTM currentLTM = ltmLearner.learnFlatLTM(rootedMWST,siblingClusters,batch);
+            if(currentLTM.getScore() > bestScore)
+                bestRootedLTM = currentLTM;
+        }
+        return bestRootedLTM;
     }
 
 }
