@@ -16,3 +16,5 @@ IMPORTANT: Parallel SVB returns different ELBO results and theresfore when used 
 --------------------- 07-08-2016 --------------------
 
 TODO: Crear una clase con 1 método estático: BNtoJson(BayesianNetwork)
+TODO: LTM.getLastBatchScore() no es llamado cuando se utiliza el ABI, por lo que devuelve 0.0, cuando tendria que devolver el mismo 
+score que LTM.getScore()

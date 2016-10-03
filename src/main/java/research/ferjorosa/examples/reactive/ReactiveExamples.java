@@ -44,6 +44,10 @@ public class ReactiveExamples {
         System.out.println(subscription.isUnsubscribed());
     }
 
+    private static void subjectCreateValues(){
+
+    }
+
     private static void unfinishedComplexExample(){
         //We can open the data stream using the static class DataStreamLoader
         DataStream<DataInstance> data = DataStreamLoader.open("datasets/syntheticData.arff");
